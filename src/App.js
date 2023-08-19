@@ -8,7 +8,7 @@ function App() {
     <Routes>
       <Route path="/" element={<ShowTasks></ShowTasks>}></Route>
       <Route path="/newTask" element={<NewTask></NewTask>}></Route>
-      <Route path="/editTask/:id" element={<NewTask></NewTask>}></Route>
+      <Route path="/editTask/:id" element={<EditTask></EditTask>}></Route>
     </Routes>
     </BrowserRouter>
   );

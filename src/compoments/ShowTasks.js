@@ -7,8 +7,8 @@ import NewTask from './NewTask';
 function MyTableComponent() {
   const apiUrl = 'https://flask-api-todo-fpc5.onrender.com/tarea';
   const [data, setData] = useState([]);
-  const [searchId, setSearchId] = useState(''); // Estado para almacenar el ID de búsqueda
-  const [searchResult, setSearchResult] = useState(null); // Estado para almacenar el resultado de la búsqueda
+  const [searchId, setSearchId] = useState(''); 
+  const [searchResult, setSearchResult] = useState(null); 
 
   useEffect(() => {
     getTasks();
@@ -47,17 +47,16 @@ function MyTableComponent() {
   const handleSearch = async () => {
     try {
       const response = await axios.get(`${apiUrl}/${searchId}`);
-      const task = response.data; // El resultado de la búsqueda por ID
+      const task = response.data; 
       setSearchResult(task);
     } catch (error) {
-      console.error('Error al buscar la tarea por ID:', error);
-      setSearchResult(null); // Si no se encuentra la tarea, establecer el resultado en nulo
+      console.error('Error al buscar la tarea por ID:', error,searchId);
+      setSearchResult(null); 
     }
   }
 
   return (
     <div>
-      <h1>List Tasks</h1>
       <div className="container mt-3">
         <div className="row justify-content-center">
           <div className="col-md-6">

@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 function NewTask() {
   const [descripcion, setDescripcion] = useState('');
   const [estado, setEstado] = useState('pendiente');
+  const [successMessage, setSuccessMessage] = useState('');
 
 
   const handleSubmit = async (e) => {
@@ -16,8 +17,8 @@ function NewTask() {
         estado: estado,
       };
 
-      const response = await axios.post('https://flask-api-todo-fpc5.onrender.com/tarea', newTaskData);
-
+      await axios.post('https://flask-api-todo-fpc5.onrender.com/tarea', newTaskData)
+      setSuccessMessage('La tarea se creo correctamente.');
 
       setDescripcion('');
       setEstado('');

@@ -4,13 +4,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useParams, Link } from 'react-router-dom';
 
 function EditTask() {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const [task, setTask] = useState({});
   const [descripcion, setDescripcion] = useState('');
   const [estado, setEstado] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
-    
     const fetchTask = async () => {
       try {
         const response = await axios.get(`https://flask-api-todo-fpc5.onrender.com/tarea/${id}`);
@@ -34,10 +34,11 @@ function EditTask() {
         estado: estado,
       };
 
-      
       await axios.put(`https://flask-api-todo-fpc5.onrender.com/tarea/${id}`, updatedTaskData);
 
-      
+      // Actualiza el estado del mensaje de éxito
+      setSuccessMessage('La tarea se actualizó correctamente.');
+
     } catch (error) {
       console.error('Error al enviar los datos de actualización a la API:', error);
     }
@@ -46,6 +47,11 @@ function EditTask() {
   return (
     <div className="container">
       <h1>Edit Task</h1>
+      {successMessage && (
+        <div className="alert alert-success" role="alert">
+          {successMessage}
+        </div>
+      )}
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="descripcion" className="form-label">
@@ -78,7 +84,7 @@ function EditTask() {
           Save
         </button>{' '}
         <Link to="/" className="btn btn-primary">
-          Cancel
+          Home
         </Link>
       </form>
     </div>
